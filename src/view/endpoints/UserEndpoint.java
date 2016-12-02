@@ -16,22 +16,6 @@ import java.util.ArrayList;
 @Path("/api")
 public class UserEndpoint {
 
-    /**
-     * En metode til at hente lektioner for et enkelt kursus i form af en JSON String.
-     *
-     * @param code Fagkoden på det kursus man ønsker at hente.
-     * @return En JSON String
-     */
-
-    @OPTIONS
-    @Path("/lecture/{code}")
-    public Response OptionsGetLectures() {
-        return Response
-                .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .build();
-    }
 
     @GET
     @Consumes("applications/json")
@@ -55,17 +39,6 @@ public class UserEndpoint {
      * @param userId Id'et på den bruger man ønsker at hente kurser for.
      * @return De givne kurser i form af en JSON String.
      */
-/*
-    @OPTIONS
-    @Path("/course/{userId}")
-    public Response getCourses() {
-        return Response
-                .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .build();
-    }
-*/
 
     @GET
     @Path("/course/{userId}")
@@ -80,17 +53,6 @@ public class UserEndpoint {
         } else {
             return errorResponse(404, "Failed. Couldn't get reviews.");
         }
-    }
-
-    @OPTIONS
-    @Path("/course/{userId}")
-    public Response getReviews() {
-        return Response
-                .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .build();
-
     }
 
 
@@ -110,24 +72,6 @@ public class UserEndpoint {
     }
 
 
-    /**
-     *
-     * @param data
-     * @return returner ingenting på localhost?
-     */
-
-
-
-    @OPTIONS
-    @Path("/login")
-    public Response OptionsLogin() {
-        return Response
-                .status(200)
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Headers", "Content-Type")
-                .build();
-    }
-
 
     @POST
     @Consumes("application/json")
@@ -137,6 +81,7 @@ public class UserEndpoint {
         Gson gson = new Gson();
         UserDTO user = new Gson().fromJson(data, UserDTO.class);
         UserController userCtrl = new UserController();
+        System.out.println("Running login method");
 
         if (user != null) {
             return successResponse(200, userCtrl.login(user.getCbsMail(), user.getPassword()));
@@ -147,19 +92,19 @@ public class UserEndpoint {
 
     protected Response errorResponse(int status, String message) {
 
-        return Response.status(status).entity(new Gson().toJson(Digester.encrypt("{\"message\": \"" + message + "\"}"))).build();
-        //return Response.status(status).entity(new Gson().toJson("{\"message\": \"" + message + "\"}")).build();
+        //return Response.status(status).entity(new Gson().toJson(Digester.encrypt("{\"message\": \"" + message + "\"}"))).build();
+        return Response.status(status).entity(new Gson().toJson("{\"message\": \"" + message + "\"}")).build();
     }
 
     protected Response successResponse(int status, Object data) {
         Gson gson = new Gson();
 
         //Adding response headers to enable CORS in the Chrome browser
-        return Response.status(status).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "Content-Type").entity(gson.toJson(data)).build();
-
+       // return Response.status(status).header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Headers", "Content-Type").entity(gson.toJson(data)).build();
+        return Response.status(status).entity(gson.toJson(data)).build();
 
     }
-               // return Response.status(status).entity(gson.toJson(data)).build();
+
 
     //return Response.status(status).entity(gson.toJson(Digester.encrypt(gson.toJson(data)))).build();
     }
