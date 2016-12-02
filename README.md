@@ -4,5 +4,3 @@ Good luck,
 - MathiasLund
 
 Over and out.
-
-commit tester
