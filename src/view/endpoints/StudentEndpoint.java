@@ -36,7 +36,7 @@ public class StudentEndpoint extends UserEndpoint {
         }
     }
 
-    @DELETE
+    @PUT
     @Consumes("application/json")
     @Path("/review/")
     public Response deleteReview(String data) {
