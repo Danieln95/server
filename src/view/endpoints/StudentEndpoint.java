@@ -19,9 +19,11 @@ public class StudentEndpoint extends UserEndpoint {
     @Consumes("application/json")
     @Path("/review")
     public Response addReview(String json) {
-
+        System.out.println("Attempting to add review");
         Gson gson = new Gson();
         ReviewDTO review = new Gson().fromJson(json, ReviewDTO.class);
+        System.out.println(review.getLectureId());
+        System.out.println(review.getUserId());
 
         StudentController studentCtrl = new StudentController();
         boolean isAdded = studentCtrl.addReview(review);
@@ -40,9 +42,15 @@ public class StudentEndpoint extends UserEndpoint {
     @Consumes("application/json")
     @Path("/review/")
     public Response deleteReview(String data) {
+
+        System.out.println("Attempting to delete review");
+
         Gson gson = new Gson();
 
         ReviewDTO review = gson.fromJson(data, ReviewDTO.class);
+
+        System.out.println(review.getUserId());
+
         StudentController studentCtrl = new StudentController();
 
         boolean isDeleted = studentCtrl.softDeleteReview(review.getUserId(), review.getId());

@@ -19,11 +19,11 @@ public class UserEndpoint {
 
     @GET
     @Consumes("applications/json")
-    @Path("/lecture/{code}")
-    public Response getLectures(@PathParam("code") String code) {
+    @Path("/lecture/{courseId}")
+    public Response getLectures(@PathParam("courseId") String courseId) {
         Gson gson = new Gson();
         UserController userCtrl = new UserController();
-        ArrayList<LectureDTO> lectures = userCtrl.getLectures(code);
+        ArrayList<LectureDTO> lectures = userCtrl.getLectures(courseId);
 
         if (!lectures.isEmpty()) {
             return successResponse(200, lectures);
