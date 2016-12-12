@@ -43,13 +43,9 @@ public class StudentEndpoint extends UserEndpoint {
     @Path("/review/")
     public Response deleteReview(String data) {
 
-        System.out.println("Attempting to delete review");
-
         Gson gson = new Gson();
 
         ReviewDTO review = gson.fromJson(data, ReviewDTO.class);
-
-        System.out.println(review.getUserId());
 
         StudentController studentCtrl = new StudentController();
 
@@ -57,10 +53,10 @@ public class StudentEndpoint extends UserEndpoint {
 
         if (isDeleted) {
             String toJson = gson.toJson(Digester.encrypt(gson.toJson(isDeleted)));
-
             return successResponse(200, toJson);
         } else {
             return errorResponse(404, "Failed. Couldn't delete the chosen review.");
         }
+
     }
 }

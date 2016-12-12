@@ -70,9 +70,9 @@ public class UserController {
                 review.setLectureId(rs.getInt("lecture_id"));
                 review.setRating(rs.getInt("rating"));
                 review.setComment(rs.getString("comment"));
-
                 reviews.add(review);
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,6 +135,7 @@ public class UserController {
 
     public ArrayList<CourseDTO> getCourses(int userId) {
 
+
         ArrayList<CourseDTO> courses = new ArrayList<CourseDTO>();
 
         try {
@@ -148,15 +149,18 @@ public class UserController {
             ResultSet rs = DBWrapper.getRecords("course", attributes, params, joins, 0);
 
             while (rs.next()) {
+
                 CourseDTO course = new CourseDTO();
 
                 course.setDisplaytext(rs.getString("name"));
                 course.setCode(rs.getString("code"));
+
                 courses.add(course);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return courses;
     }
 }

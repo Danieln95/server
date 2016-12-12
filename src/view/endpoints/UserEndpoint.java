@@ -44,6 +44,7 @@ public class UserEndpoint {
     @Path("/course/{userId}")
     public Response getCourses(@PathParam("userId") int userId) {
 
+
         Gson gson = new Gson();
         UserController userCtrl = new UserController();
         ArrayList<CourseDTO> courses = userCtrl.getCourses(userId);
