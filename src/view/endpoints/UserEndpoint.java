@@ -82,7 +82,6 @@ public class UserEndpoint {
         Gson gson = new Gson();
         UserDTO user = new Gson().fromJson(data, UserDTO.class);
         UserController userCtrl = new UserController();
-        System.out.println("Running login method");
 
         if (user != null) {
             return successResponse(200, userCtrl.login(user.getCbsMail(), user.getPassword()));

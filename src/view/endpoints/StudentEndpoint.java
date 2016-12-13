@@ -22,15 +22,12 @@ public class StudentEndpoint extends UserEndpoint {
         System.out.println("Attempting to add review");
         Gson gson = new Gson();
         ReviewDTO review = new Gson().fromJson(json, ReviewDTO.class);
-        System.out.println(review.getLectureId());
-        System.out.println(review.getUserId());
 
         StudentController studentCtrl = new StudentController();
         boolean isAdded = studentCtrl.addReview(review);
 
         if (isAdded) {
             String toJson = gson.toJson(Digester.encrypt(gson.toJson(isAdded)));
-
             return successResponse(200, toJson);
 
         } else {

@@ -39,7 +39,6 @@ public class UserController {
 
             while (rs.next()) {
                 user.setId(rs.getInt("id"));
-                System.out.print("User found");
                 return user;
             }
 
@@ -111,7 +110,7 @@ public class UserController {
 
 
     //Metode der softdeleter et review fra databasen - skal ind i AdminControlleren, da dette er moden for at slette et review uafhængigt af brugertype.
-    public boolean softDeleteReview(int userId, int reviewId) {
+    public boolean softDeleteReview(int userId, int id) {
         boolean isSoftDeleted = true;
 
         try {
@@ -121,7 +120,7 @@ public class UserController {
 
             Map<String, String> whereParams = new HashMap();
             whereParams.put("user_id", String.valueOf(userId));
-            whereParams.put("id", String.valueOf(reviewId));
+            whereParams.put("id", String.valueOf(id));
 
             DBWrapper.updateRecords("review", isDeleted, whereParams);
             return isSoftDeleted;
