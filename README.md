@@ -1,6 +1,3 @@
-Password til brugere i ny SQL-dump: cbs
+Welcome to evalutation. To run the server application please right click "Run" and click "Run 'Run.main()'"
 
-Good luck, 
-- MathiasLund
-
-Over and out.
+The server will then be running and you are ready to use the client.
