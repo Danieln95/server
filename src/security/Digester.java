@@ -84,7 +84,7 @@ public class Digester {
         return decrypted_string;
     }
 
-    //
+
     private static byte[] xorWithKey(byte[] a, byte[] key) {
         byte[] out = new byte[a.length];
         for (int i = 0; i < a.length; i++) {
